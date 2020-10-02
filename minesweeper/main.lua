@@ -5,14 +5,15 @@ function love.load()
 end
 
 function love.keypressed(key)
-  
+  selectionBox:pressed(key)
+  game:pressed(key)
 end
 
 
 
 
 function love.keyreleased(key) 
-  
+   selectionBox:released(key)
 end
     
 function love.update(dt)

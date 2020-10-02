@@ -5,7 +5,7 @@ function love.load()
   images = {}
   firstmove = true
   
-  selectedX = 0
+  selectedX = titleBarHeight
   selectedY = 0
   gameOver = false
   for imageIndex,image in ipairs({
@@ -17,17 +17,7 @@ function love.load()
   
   
   --flower placement
-  local possibleFlowerPosition = {}
-  for y = 1, yMax do
-    for x = 1, xMax do
-      table.insert(possibleFlowerPosition,{x = x, y = y})
-    end
-  end
   
-  for flowerIndex = 1,BombNum do
-    local position = table.remove(possibleFlowerPosition,love.math.random(#possibleFlowerPosition))
-    grid[position.y][position.x].bomb = true
-  end
   function updateFlowernum()
     for y = 1, yMax do
       for x = 1, xMax do
@@ -184,7 +174,6 @@ function love.draw()
           drawCell(images[grid[y][x].number],x,y)
         end
       end
-
     end
   end
   selectionBox:draw()

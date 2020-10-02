@@ -7,10 +7,10 @@ function love.conf(t)
   cellSize = 18
   screenWidth = xMax * cellSize
   screenHeight = yMax  * cellSize
-  delayMax = 0.3
-  BombNum = 40
-  flagCount = 40
-  
+  delayMax = 0.1
+  BombNum = 2
+  flagCount = 99
+  titleBarHeight = 40
     t.identity = nil                    -- The name of the save directory (string)
     t.appendidentity = false            -- Search files in source directory before save directory (boolean)
     t.version = "11.3"                  -- The LÖVE version this game was made for (string)

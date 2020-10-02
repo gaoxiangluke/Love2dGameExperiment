@@ -4,8 +4,19 @@ selectionBox = {
 }
 local currentDelay = 0
 local firstmove = true
-function selectionBox:load()
+local gameover = false
+local firsttouch = false --if the first selection is bomb reset bomb position
+function selectionBox:reset()
   require "grid"
+  self.x = 0
+  self.y = 0
+  gameover = false
+  firstmove = true
+  currentDelay = 0
+  local firsttouch = false
+end
+function selectionBox:load()
+  selectionBox:reset()
 end
 
 function selectionBox:update(dt)
@@ -55,19 +66,30 @@ function selectionBox:update(dt)
   if selectedY > yMax then
     selectedY = yMax
   end
-  
-  return false;
+  grid:setSelected(selectedX,selectedY)
+  return gameover;
 end
 function selectionBox:draw()
   love.graphics.setColor(0, 0, 1)
-  love.graphics.rectangle('line',self.x,self.y,cellSize,cellSize)
+  love.graphics.rectangle('line',self.x,self.y + titleBarHeight,cellSize,cellSize)
   love.graphics.setColor(1, 1, 1)
 end
-function selectionBox:keypressed(key)
-  
+function selectionBox:pressed(key)
+  if ( key == 'j' and grid:isflag(selectedX,selectedY)==false) then
+    if (grid:isBomb(selectedX,selectedY) and firsttouch == false) then
+      gameover = true
+    elseif (grid:isBomb(selectedX,selectedY) and firsttouch == true) then
+      firsttouch = false
+      grid:placebomb(selectedX,selectedY)
+    end
+    grid:uncovered(selectedX,selectedY)
+  end
+  if (key == 'k') then
+    grid:setFlag(selectedX,selectedY)
+  end
 end
 
-function selectionBox:keyreleased(key)
+function selectionBox:released(key)
   if key == 'right' or key == 'left' or key == 'up' or key == 'down' then
     currentDelay = 0
     firstmove = true
