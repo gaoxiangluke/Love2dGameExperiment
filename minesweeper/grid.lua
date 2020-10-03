@@ -109,10 +109,10 @@ function grid:draw()
          end
       else
          if grid[y][x].state == "uncovered" then
-           drawCell(images.uncovered,x,y)
+          drawCell(images.uncovered,x,y)
          else
-           drawCell(images.covered,x,y)
-            drawFlag(x,y)
+          drawCell(images.covered,x,y)
+          drawFlag(x,y)
          end
       end
       if grid[y][x].state == "uncovered" then

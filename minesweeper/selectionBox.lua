@@ -5,7 +5,7 @@ selectionBox = {
 local currentDelay = 0
 local firstmove = true
 local gameover = false
-local firsttouch = false --if the first selection is bomb reset bomb position
+local firsttouch = true --if the first selection is bomb reset bomb position
 function selectionBox:reset()
   require "grid"
   self.x = 0
@@ -13,7 +13,7 @@ function selectionBox:reset()
   gameover = false
   firstmove = true
   currentDelay = 0
-  local firsttouch = false
+  firsttouch = true
 end
 function selectionBox:load()
   selectionBox:reset()
@@ -78,17 +78,21 @@ function selectionBox:pressed(key)
   if ( key == 'j' and grid:isflag(selectedX,selectedY)==false) then
     if (grid:isBomb(selectedX,selectedY) and firsttouch == false) then
       gameover = true
+      firsttouch = false
     elseif (grid:isBomb(selectedX,selectedY) and firsttouch == true) then
       firsttouch = false
-      grid:placebomb(selectedX,selectedY)
+      placeBomb(selectedX,selectedY)
     end
+    firsttouch = false
     grid:uncovered(selectedX,selectedY)
   end
   if (key == 'k') then
     grid:setFlag(selectedX,selectedY)
   end
 end
-
+function selectionBox:getFirsttouch()
+  return firsttouch
+end
 function selectionBox:released(key)
   if key == 'right' or key == 'left' or key == 'up' or key == 'down' then
     currentDelay = 0
