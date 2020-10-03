@@ -76,15 +76,15 @@ function game:pressed(key)
   elseif (game.state == "selection") then
     local diff = difficulty:pressed(key)
     if (diff == 1) then
-      BombNum = 15
+      BombNum = easynum
       flagCount = BombNum
       game:loadgame()
     elseif (diff==2) then
-      BombNum = 25
+      BombNum = mediumnum
       flagCount = BombNum
       game:loadgame()
     elseif(diff==3) then
-      BombNum = 35
+      BombNum = hardnum
       flagCount = BombNum
       game:loadgame()
     end
