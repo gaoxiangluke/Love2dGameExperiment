@@ -11,8 +11,8 @@ function love.conf(t)
   flagCount = BombNum
   titleBarHeight = 40
    t.window.title = "minesweeper"
-  t.window.width = 320 
-  t.window.height = 240
+  t.window.width = 1000 
+  t.window.height = 1000
   t.version="11.1"
    
 end

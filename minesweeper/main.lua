@@ -5,7 +5,6 @@ function love.load()
 end
 
 function love.keypressed(key)
-  selectionBox:pressed(key)
   game:pressed(key)
   if key == 'escape' then 
     love.event.quit()
@@ -16,7 +15,7 @@ end
 
 
 function love.keyreleased(key) 
-   selectionBox:released(key)
+   game:released(key)
 end
     
 function love.update(dt)
